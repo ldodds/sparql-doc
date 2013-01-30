@@ -53,10 +53,8 @@
 					  <% query.see.each do |see| %>
 					  <dt>Link</dt>
 					  <dd><a href="<%= see %>"><%= see %></a></dd>
-					  <% end %>
-					  
+					  <% end %>					  
 					</dl>					
-					<p>Source for this query was read from <code><%= query.path %></code></p>
 					<textarea id="sparql" cols="120" rows="50"><%= query.query %></textarea>
 					<script>
 					  var editor = CodeMirror.fromTextArea(document.getElementById("sparql"), {
