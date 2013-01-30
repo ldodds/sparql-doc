@@ -72,5 +72,25 @@ EOL
     assert_equal(["http://github.com/ldodds/sparql-doc"], query.see)
     assert_equal(["demo", "test"], query.tags)            
   end  
+
+  def test_markdown    
+    sparql=<<-EOL     
+#Description
+DESCRIBE ?x
+EOL
+    query = SparqlDoc::Query.new("/path/to/query.rq", sparql)
+    assert_equal("<p>Description<p>", query.description(true))
+    assert_equal("DESCRIBE ?x", query.query)  
+  end  
   
+  def test_markdown    
+    sparql=<<-EOL     
+#See [my website](http://example.org)
+DESCRIBE ?x
+EOL
+    query = SparqlDoc::Query.new("/path/to/query.rq", sparql)
+    assert_equal("<p>See <a href=\"http://example.org\">my website</a></p>\n", query.description(true))
+    assert_equal("DESCRIBE ?x", query.query)  
+  end    
+    
 end

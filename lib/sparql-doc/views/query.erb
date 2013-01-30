@@ -29,9 +29,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="index.html">Lens Browser</a>
+          <a class="brand" href="index.html">SPARQL Query Documentation</a>
           <div class="nav-collapse collapse">
-            List?
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -39,35 +38,39 @@
 
 <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">         
-              <li class="active"><a href="#">Link</a></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div class="span9">
-          <div class="row-fluid">
-              <div id="query-viewer">
-              
-					<h2>Viewing Query</h2>
-					<% if query.query %>
-						<textarea id="sparql" cols="120" rows="50"><%= query.query %></textarea>
-						<script>
-						  var editor = CodeMirror.fromTextArea(document.getElementById("sparql"), {
-							    height: "250px",
-							    width: "250px",
-							    autofocus: false,
-							    readOnly: true,
-							    
-							    parserfile: "parsesparql.js",
-							    stylesheet: "/sparqlcolors.css",
-							    path: "js/",
-							    lineNumbers: true
-							  });												
-						</script>						
-					<% end %>
-					
+        <div class="span12">
+          <div class="row-fluid">          		
+              <div id="query-viewer">              		             
+					<h2><%= query.title %></h2>
+					<p><%= query.description(true) %></p>
+					<dl>					
+					  <dt>Source File</dt>
+					  <dd><code><%= query.path %></code></dd>
+					  <% query.authors.each do |author| %>
+					  <dt>Author</dt>
+					  <dd><%= author %></dd>
+					  <% end %>
+					  <% query.see.each do |see| %>
+					  <dt>Link</dt>
+					  <dd><a href="<%= see %>"><%= see %></a></dd>
+					  <% end %>
+					  
+					</dl>					
+					<p>Source for this query was read from <code><%= query.path %></code></p>
+					<textarea id="sparql" cols="120" rows="50"><%= query.query %></textarea>
+					<script>
+					  var editor = CodeMirror.fromTextArea(document.getElementById("sparql"), {
+						    height: "250px",
+						    width: "250px",
+						    autofocus: false,
+						    readOnly: true,
+						    
+						    parserfile: "parsesparql.js",
+						    stylesheet: "/sparqlcolors.css",
+						    path: "js/",
+						    lineNumbers: true
+						  });												
+					</script>						
               </div>
           </div><!--/row-->
         </div><!--/span-->

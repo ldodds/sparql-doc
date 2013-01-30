@@ -15,23 +15,50 @@
   </head>
   <body>
   
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="index.html">SPARQL Query Index</a>
+          <div class="nav-collapse collapse">
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+      
 <div class="container">
       <div class="hero-unit">
-        <h1>SPARQL Browser</h1>
+        <h1>SPARQL Query Index</h1>
       </div>
 
       <div class="row">
-        <div class="span4">
-          <h2>Summary</h2>
-          
-          <p><%= @queries.size %> queries</p>
-                    
+        <div class="span12">
+          <h2>Index</h2>
+          <p>This set of documentation covers <%= @queries.size %> queries</p>
         </div>
-        <div class="span4">
-          <h2>Browse</h2>
-          <p>Browse through all lenses in this configuration</p>
-          <p><a class="btn" href="browse.html">Browse</a></p>
-       </div>
+      </div>
+
+      <div class="row">
+        <div class="span12">
+          <table class="table">
+            <thead>
+            	<tr>
+            		<th>Title</th><th>Source Path</th>
+            	</tr>
+            </thead>
+            <tbody>
+           		<% @queries.each do |query| %>
+           		<tr>
+           		  <td><a href="<%= query.output_filename %>"><%= query.title %></a></td><td><code><%= query.path %></code></td>
+           		</tr>
+           		<% end %>
+			</tbody>           		
+          </table>
+        </div>
       </div>
 
 </div>

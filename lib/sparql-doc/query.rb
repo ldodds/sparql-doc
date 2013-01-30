@@ -19,8 +19,17 @@ module SparqlDoc
       initPrefixes()
     end
     
+    def output_filename
+      return "#{path.gsub(".rq", "")}.html"
+    end
+    
     def description(html=false)
-      return @description unless html
+      if html
+        renderer = Redcarpet::Render::HTML.new({})
+        markdown = Redcarpet::Markdown.new(renderer, {})
+        return markdown.render(@description)
+      end
+      @description
     end
     
     #SELECT|CONSTRUCT|...

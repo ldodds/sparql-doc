@@ -8,7 +8,8 @@ module SparqlDoc
       @output_dir = output_dir
       
       @queries = parse_queries()
-      
+      @queries.sort! {|x,y| x.title <=> y.title }
+           
       template_dir = File.dirname( __FILE__ )
           
       @index_template = ERB.new(File.read(File.join(template_dir, "views", "index.erb")))
@@ -18,9 +19,10 @@ module SparqlDoc
     
     def parse_queries()
       queries = []
-      Dir.glob("#{@dir}/**.rq") do |file|
+      Dir.glob("#{@dir}/*.rq") do |file|
         content = File.read(file)
-        queries << SparqlDoc::Query.new(content)
+        path = file.gsub("#{@dir}/", "")
+        queries << SparqlDoc::Query.new(path, content)
       end
       return queries
     end
@@ -55,12 +57,12 @@ module SparqlDoc
     def generate_query_pages()
       @queries.each do |query|
         sha = Digest::SHA1.hexdigest(query.query)
-        File.open( File.join(@output_dir, "#{sha}.html"), "w" ) do |f|
+        File.open( File.join(@output_dir, query.output_filename), "w" ) do |f|
           b = binding
           dir = @dir                          
           f.puts( @query_template.result(b) )
         end        
-      end        
+      end     
     end
       
   
