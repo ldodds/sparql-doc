@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+$:.unshift File.join(File.dirname(__FILE__), "..", "lib")
+require 'rubygems'
+require 'sparql-doc'
+
+generator = SparqlDoc::Generator.new(ARGV[0], ARGV[1])
+generator.run()
