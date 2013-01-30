@@ -1,21 +1,11 @@
-#Describe a resource with a specific ISSN
+#This query illustrates how to describe a resource which is identified
+#by matching one of its properties. In this case a work is being identified
+#using its ISBN-10 value.
 # @title Describe via ISSN
-PREFIX bio: <http://purl.org/vocab/bio/0.1/> 
+# @author Leigh Dodds
+# @see http://www.isbn.org/
+# @tag book, isbn
 PREFIX bibo: <http://purl.org/ontology/bibo/> 
-PREFIX blterms: <http://www.bl.uk/schemas/bibliographic/blterms#> 
-PREFIX dct: <http://purl.org/dc/terms/> 
-PREFIX event: <http://purl.org/NET/c4dm/event.owl#> 
-PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
-PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> 
-PREFIX isbd: <http://iflastandards.info/ns/isbd/elements/> 
-PREFIX org: <http://www.w3.org/ns/org#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX rda: <http://RDVocab.info/ElementsGr2/> 
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
-
 DESCRIBE ?uri WHERE {
   ?uri bibo:isbn10 "0261102214".
 }
