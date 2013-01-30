@@ -50,6 +50,10 @@ Here's an example that uses all these:
 The query description can be written in [Markdown](http://daringfireball.net/projects/markdown/). So 
 you can include embedded markup, e.g. links, that help to further document a query.
  
+## Example
+
+Here's [the example output](http://ldodds.github.com/sparql-doc/) using the example queries included in the project.
+
 ## Installation
 
 The application is based on Ruby 1.9.3 and uses the JSON and [Redcarpet](https://github.com/vmg/redcarpet) gems.
