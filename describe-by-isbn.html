@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <title>Query</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="codemirror.css">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>    
+	<script src="jquery.js"></script> 		
+	<script src="bootstrap.min.js"></script>
+	
+	<script src="codemirror.js" type="text/javascript"></script> 		 				
+	<script src="sparql.js"></script>
+    
+  </head>
+  <body>
+  
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="index.html">SPARQL Query Documentation</a>
+          <div class="nav-collapse collapse">
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+<div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="row-fluid">          		
+              <div id="query-viewer">              		             
+					<h2>Describe via ISSN</h2>
+					<p><p>This query illustrates how to describe a resource which is identified
+by matching one of its properties. In this case a work is being identified
+using its ISBN-10 value.</p>
+</p>
+					<dl>					
+					  <dt>Source File</dt>
+					  <dd><code>describe-by-isbn.rq</code></dd>
+					  
+					  <dt>Author</dt>
+					  <dd>Leigh Dodds</dd>
+					  
+					  
+					  <dt>Link</dt>
+					  <dd><a href="http://www.isbn.org/">http://www.isbn.org/</a></dd>
+					  					  
+					</dl>					
+					<textarea id="sparql" cols="120" rows="50">PREFIX bibo: <http://purl.org/ontology/bibo/> 
+DESCRIBE ?uri WHERE {
+  ?uri bibo:isbn10 "0261102214".
+}</textarea>
+					<script>
+					  var editor = CodeMirror.fromTextArea(document.getElementById("sparql"), {
+						    height: "250px",
+						    width: "250px",
+						    autofocus: false,
+						    readOnly: true,
+						    
+						    parserfile: "parsesparql.js",
+						    stylesheet: "/sparqlcolors.css",
+						    path: "js/",
+						    lineNumbers: true
+						  });												
+					</script>						
+              </div>
+          </div><!--/row-->
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+</div>
+
+  </body>	
+</html>
+

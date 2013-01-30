@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <title>Query</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="codemirror.css">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>    
+	<script src="jquery.js"></script> 		
+	<script src="bootstrap.min.js"></script>
+	
+	<script src="codemirror.js" type="text/javascript"></script> 		 				
+	<script src="sparql.js"></script>
+    
+  </head>
+  <body>
+  
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="index.html">SPARQL Query Documentation</a>
+          <div class="nav-collapse collapse">
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+<div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="row-fluid">          		
+              <div id="query-viewer">              		             
+					<h2>Describe authors via a work</h2>
+					<p><p>Matches a book based on its ISBN and then returns a description of its
+author or authors.</p>
+</p>
+					<dl>					
+					  <dt>Source File</dt>
+					  <dd><code>select-distinct-author-by-isbn.rq</code></dd>
+					  
+					  					  
+					</dl>					
+					<textarea id="sparql" cols="120" rows="50">PREFIX bio: <http://purl.org/vocab/bio/0.1/> 
+PREFIX bibo: <http://purl.org/ontology/bibo/> 
+PREFIX blterms: <http://www.bl.uk/schemas/bibliographic/blterms#> 
+PREFIX dct: <http://purl.org/dc/terms/> 
+PREFIX event: <http://purl.org/NET/c4dm/event.owl#> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> 
+PREFIX isbd: <http://iflastandards.info/ns/isbd/elements/> 
+PREFIX org: <http://www.w3.org/ns/org#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX rda: <http://RDVocab.info/ElementsGr2/> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+
+SELECT DISTINCT ?author WHERE {
+  #Match the book
+  ?uri bibo:isbn10 "0261102214";
+       #Match its author
+	   dct:creator ?author.
+}</textarea>
+					<script>
+					  var editor = CodeMirror.fromTextArea(document.getElementById("sparql"), {
+						    height: "250px",
+						    width: "250px",
+						    autofocus: false,
+						    readOnly: true,
+						    
+						    parserfile: "parsesparql.js",
+						    stylesheet: "/sparqlcolors.css",
+						    path: "js/",
+						    lineNumbers: true
+						  });												
+					</script>						
+              </div>
+          </div><!--/row-->
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+</div>
+
+  </body>	
+</html>
+
