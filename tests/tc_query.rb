@@ -12,6 +12,8 @@ class QueryTest < Test::Unit::TestCase
     assert_equal([], query.see)
     assert_equal([], query.tag)
     assert_equal([], query.author)
+    assert_equal([], query.endpoint)
+    assert_equal([], query.param)
     assert_equal("DESCRIBE ?x", query.query)  
     assert_equal("DESCRIBE ?x", query.raw_query)
   end

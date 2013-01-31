@@ -18,6 +18,12 @@ module SparqlDoc
       :title => {
         :multi => false 
       },
+      :endpoint => {
+        :multi => true
+      },
+      :param => {
+        :multi => true
+      }
     }
         
     ANNOTATIONS.each do |var, config|
