@@ -56,7 +56,13 @@ using its ISBN-10 value.</p>
 					  
 					  <dt>Link</dt>
 					  <dd><a href="http://www.isbn.org/">http://www.isbn.org/</a></dd>
-					  					  
+					  			  
+					   
+					  	<dt>Tag</dt>
+					  	<dd>
+					  	   book, isbn
+					  	</dd>
+					  							  					  
 					</dl>					
 					<textarea id="sparql" cols="120" rows="50">PREFIX bibo: <http://purl.org/ontology/bibo/> 
 DESCRIBE ?uri WHERE {
@@ -74,7 +80,18 @@ DESCRIBE ?uri WHERE {
 						    path: "js/",
 						    lineNumbers: true
 						  });												
-					</script>						
+					</script>	
+					
+					<h3>Test This Query</h3>
+					<p>Try this query against the following endpoints:</p>
+					<ul>
+					  
+					    <li>
+					      <a href="http://bnb.data.bl.uk/sparql?query=PREFIX+bibo%3A+%3Chttp%3A%2F%2Fpurl.org%2Fontology%2Fbibo%2F%3E+%0ADESCRIBE+%3Furi+WHERE+%7B%0A++%3Furi+bibo%3Aisbn10+%220261102214%22.%0A%7D" target="_blank">http://bnb.data.bl.uk/sparql</a>
+					    </li>
+					  
+					</ul> 
+					
               </div>
           </div><!--/row-->
         </div><!--/span-->

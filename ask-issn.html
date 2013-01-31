@@ -54,7 +54,8 @@
 					  
 					  <dt>Link</dt>
 					  <dd><a href="http://www.isbn.org/">http://www.isbn.org/</a></dd>
-					  					  
+					  			  
+					  							  					  
 					</dl>					
 					<textarea id="sparql" cols="120" rows="50">PREFIX bio: <http://purl.org/vocab/bio/0.1/> 
 PREFIX bibo: <http://purl.org/ontology/bibo/> 
@@ -88,7 +89,18 @@ ASK WHERE {
 						    path: "js/",
 						    lineNumbers: true
 						  });												
-					</script>						
+					</script>	
+					
+					<h3>Test This Query</h3>
+					<p>Try this query against the following endpoints:</p>
+					<ul>
+					  
+					    <li>
+					      <a href="http://bnb.data.bl.uk/sparql?query=PREFIX+bio%3A+%3Chttp%3A%2F%2Fpurl.org%2Fvocab%2Fbio%2F0.1%2F%3E+%0APREFIX+bibo%3A+%3Chttp%3A%2F%2Fpurl.org%2Fontology%2Fbibo%2F%3E+%0APREFIX+blterms%3A+%3Chttp%3A%2F%2Fwww.bl.uk%2Fschemas%2Fbibliographic%2Fblterms%23%3E+%0APREFIX+dct%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E+%0APREFIX+event%3A+%3Chttp%3A%2F%2Fpurl.org%2FNET%2Fc4dm%2Fevent.owl%23%3E+%0APREFIX+foaf%3A+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E+%0APREFIX+geo%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23%3E+%0APREFIX+isbd%3A+%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Fisbd%2Felements%2F%3E+%0APREFIX+org%3A+%3Chttp%3A%2F%2Fwww.w3.org%2Fns%2Forg%23%3E+%0APREFIX+owl%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2002%2F07%2Fowl%23%3E+%0APREFIX+rda%3A+%3Chttp%3A%2F%2FRDVocab.info%2FElementsGr2%2F%3E+%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E+%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E+%0APREFIX+skos%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E+%0APREFIX+xsd%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E+%0A%0APREFIX+bibo%3A+%3Chttp%3A%2F%2Fpurl.org%2Fontology%2Fbibo%2F%3E%0AASK+WHERE+%7B%0A++%3Furi+bibo%3Aissn+%221356-0069%22.%0A%7D" target="_blank">http://bnb.data.bl.uk/sparql</a>
+					    </li>
+					  
+					</ul> 
+					
               </div>
           </div><!--/row-->
         </div><!--/span-->
