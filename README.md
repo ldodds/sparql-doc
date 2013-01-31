@@ -32,8 +32,8 @@ The full list of supported tags is:
 * `@author`: author(s) of the query. Can have multiple uses
 * `@see`: add a link from the documentation
 * `@param`: parameter. Not yet used in template
-* `@endpoint`: suggested endpoint for query. Not yet used in template
-* `@tag`: add a tag to a query. Not yet used, but this will (eventually) be used to organise queries
+* `@endpoint`: suggest an endpoint for using query. Automatically adds query link to docs
+* `@tag`: add a tag to a query. Displayed but not yet used, but this will (eventually) be used to organise queries
 
 Here's an example that uses all these:
 
