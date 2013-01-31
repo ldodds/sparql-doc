@@ -16,6 +16,30 @@ class QueryTest < Test::Unit::TestCase
     assert_equal([], query.param)
     assert_equal("DESCRIBE ?x", query.query)  
     assert_equal("DESCRIBE ?x", query.raw_query)
+    assert_equal("DESCRIBE", query.type)
+  end
+
+  def test_type    
+    query = SparqlDoc::Query.new("/path/to/query.rq", "describe ?x")
+    assert_equal("DESCRIBE", query.type)
+  end    
+  
+  def test_prefixes
+    sparql=<<-EOL     
+#Description
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+prefix foo: <http://example.org/foo>
+ PREFIX bar: <http://example.org/bar>
+prefix   baz  : <http://example.org/baz#>
+DESCRIBE ?x
+EOL
+    query = SparqlDoc::Query.new("/path/to/query.rq", sparql)
+    assert_equal("DESCRIBE", query.type)    
+    assert_equal( 4, query.prefixes.size )
+    assert_equal( "http://xmlns.com/foaf/0.1/", query.prefixes["foaf"] )
+    assert_equal( "http://example.org/foo", query.prefixes["foo"] )
+    assert_equal( "http://example.org/bar", query.prefixes["bar"] )
+    assert_equal( "http://example.org/baz#", query.prefixes["baz"] )
   end
   
   def test_description    

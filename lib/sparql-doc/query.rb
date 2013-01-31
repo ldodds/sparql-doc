@@ -3,7 +3,7 @@ module SparqlDoc
   #Wrapper for SPARQL query  
   class Query
     
-    attr_reader :path, :query, :raw_query, :prefixes 
+    attr_reader :path, :query, :raw_query, :prefixes, :type
 
     ANNOTATIONS = {
       :author => {
@@ -44,8 +44,7 @@ module SparqlDoc
       @title = @path
       @description = ""
       @prefixes = {}
-      initComments()
-      initPrefixes()
+      parseQuery()
     end
     
     def output_filename
@@ -61,18 +60,9 @@ module SparqlDoc
       @description
     end
     
-    #SELECT|CONSTRUCT|...
-    def type
-      ""
-    end
-          
     private
     
-      def initPrefixes()
-        
-      end
-      
-      def initComments
+      def parseQuery
         query_lines = []
         header = true
         description = false 
@@ -89,10 +79,6 @@ module SparqlDoc
                 else
                   instance_variable_set("@#{annotation}", matches[2].strip)
                 end                
-                #@title = matches[2].strip if matches[1] == "title"
-                #@authors << matches[2].strip if matches[1] == "author"
-                #@see << matches[2].strip if matches[1] == "see"
-                #@tags << matches[2].strip if matches[1] == "tag"
                 description = true
               end
             else if (description == false) 
@@ -106,7 +92,15 @@ module SparqlDoc
         end
         @description = description_lines.join("\n") unless description_lines.empty?
         @query = query_lines.join("\n") unless query_lines.empty?    
-        @query.strip!              
+        @query.strip!
+        query_lines.each do |line|
+          if (matches = line.match(/^ *PREFIX *([a-zA-Z_-]+) *: *<(.+)>$/i) )
+            @prefixes[ matches[1] ] = matches[2]
+          end
+          if (matches = line.match(/^ *(SELECT|CONSTRUCT|DESCRIBE|ASK) */i) )
+            @type = matches[1].upcase
+          end
+        end              
       end
   end
 end
