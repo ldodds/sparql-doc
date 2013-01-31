@@ -31,6 +31,8 @@ The full list of supported tags is:
 * `@title`: should have a single value. Last title tag wins
 * `@author`: author(s) of the query. Can have multiple uses
 * `@see`: add a link from the documentation
+* `@param`: parameter. Not yet used in template
+* `@endpoint`: suggested endpoint for query. Not yet used in template
 * `@tag`: add a tag to a query. Not yet used, but this will (eventually) be used to organise queries
 
 Here's an example that uses all these:
@@ -41,7 +43,8 @@ Here's an example that uses all these:
 	# @title Describe via ISSN
 	# @author Leigh Dodds
 	# @see http://www.isbn.org/
-	# @tag book, isbn
+	# @tag book
+	# @tag isbn
 	PREFIX bibo: <http://purl.org/ontology/bibo/> 
 	DESCRIBE ?uri WHERE {
 	  ?uri bibo:isbn10 "0261102214".
@@ -82,7 +85,7 @@ Later versions will support additional command-line options
 
 ## TODO
 
-* Support @endpoint on queries and as a global parameter
+* Support @endpoint as a global parameter
 * Supporting running queries from documentation
 * Configurable templates
 * Injection of environment variables/parameters
