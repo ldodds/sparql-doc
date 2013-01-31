@@ -45,6 +45,7 @@ Here's an example that uses all these:
 	# @see http://www.isbn.org/
 	# @tag book
 	# @tag isbn
+	# @endpoint http://bnb.data.bl.uk/sparql 
 	PREFIX bibo: <http://purl.org/ontology/bibo/> 
 	DESCRIBE ?uri WHERE {
 	  ?uri bibo:isbn10 "0261102214".
