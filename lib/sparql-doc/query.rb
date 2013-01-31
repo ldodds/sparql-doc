@@ -80,6 +80,8 @@ module SparqlDoc
                   instance_variable_set("@#{annotation}", matches[2].strip)
                 end                
                 description = true
+              else
+                $stderr.puts("Ignoring unknown annotation: @#{annotation}")
               end
             else if (description == false) 
               description_lines << line[1..-1].strip

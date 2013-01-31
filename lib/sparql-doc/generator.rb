@@ -34,7 +34,7 @@ module SparqlDoc
     end
   
     def copy_assets()
-      $stdout.puts("Copying assets");
+      $stderr.puts("Copying assets");
       asset_dir = File.join( File.dirname( __FILE__ ), "assets" )
       Dir.new(asset_dir).each() do |file|
         if file != "." and file != ".."
@@ -44,7 +44,7 @@ module SparqlDoc
     end
       
     def generate_index()
-      $stdout.puts("Generating index.html");
+      $stderr.puts("Generating index.html");
       b = binding
       dir = @dir
       queries = @queries
@@ -56,6 +56,7 @@ module SparqlDoc
     
     def generate_query_pages()
       @queries.each do |query|
+        $stderr.puts("Generating docs for #{query.path}")
         File.open( File.join(@output_dir, query.output_filename), "w" ) do |f|
           b = binding
           dir = @dir                          
