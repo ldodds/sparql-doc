@@ -60,6 +60,10 @@ module SparqlDoc
       @description
     end
     
+    def query_string
+      CGI::escape( @query )
+    end
+    
     private
     
       def parseQuery

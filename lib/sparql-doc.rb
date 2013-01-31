@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'erb'
+require 'cgi'
 require 'json'
 require 'fileutils'
 require 'redcarpet'

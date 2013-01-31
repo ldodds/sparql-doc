@@ -53,7 +53,13 @@
 					  <% query.see.each do |see| %>
 					  <dt>Link</dt>
 					  <dd><a href="<%= see %>"><%= see %></a></dd>
-					  <% end %>					  
+					  <% end %>			  
+					  <% if query.tag.length > 0 %> 
+					  	<dt>Tag</dt>
+					  	<dd>
+					  	   <%= query.tag.join(", ") %>
+					  	</dd>
+					  <% end %>							  					  
 					</dl>					
 					<textarea id="sparql" cols="120" rows="50"><%= query.query %></textarea>
 					<script>
@@ -68,7 +74,18 @@
 						    path: "js/",
 						    lineNumbers: true
 						  });												
-					</script>						
+					</script>	
+					<% if query.endpoint.length > 0 %>
+					<h3>Test This Query</h3>
+					<p>Try this query against the following endpoints:</p>
+					<ul>
+					  <% query.endpoint.each do |endpoint| %>
+					    <li>
+					      <a href="<%=endpoint%>?query=<%= query.query_string %>" target="_blank"><%= endpoint %></a>
+					    </li>
+					  <% end %>
+					</ul> 
+					<% end %>
               </div>
           </div><!--/row-->
         </div><!--/span-->

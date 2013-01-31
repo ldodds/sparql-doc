@@ -16,6 +16,7 @@ class QueryTest < Test::Unit::TestCase
     assert_equal([], query.param)
     assert_equal("DESCRIBE ?x", query.query)  
     assert_equal("DESCRIBE ?x", query.raw_query)
+    assert_equal("DESCRIBE+%3Fx", query.query_string)
     assert_equal("DESCRIBE", query.type)
   end
 
