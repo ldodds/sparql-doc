@@ -10,8 +10,8 @@ class QueryTest < Test::Unit::TestCase
     assert_equal("", query.description)
     assert_equal({}, query.prefixes)
     assert_equal([], query.see)
-    assert_equal([], query.tags)
-    assert_equal([], query.authors)
+    assert_equal([], query.tag)
+    assert_equal([], query.author)
     assert_equal("DESCRIBE ?x", query.query)  
     assert_equal("DESCRIBE ?x", query.raw_query)
   end
@@ -54,7 +54,7 @@ EOL
     assert_equal("DESCRIBE ?x", query.query)  
   end
   
-  def test_title    
+  def test_all
     sparql=<<-EOL     
 #Description
 # @title My Query   
@@ -68,9 +68,9 @@ EOL
     assert_equal("My Query", query.title)
     assert_equal("Description", query.description)
     assert_equal("DESCRIBE ?x", query.query)  
-    assert_equal(["leigh@ldodds.com"], query.authors)
+    assert_equal(["leigh@ldodds.com"], query.author)
     assert_equal(["http://github.com/ldodds/sparql-doc"], query.see)
-    assert_equal(["demo", "test"], query.tags)            
+    assert_equal(["demo", "test"], query.tag)            
   end  
 
   def test_markdown    

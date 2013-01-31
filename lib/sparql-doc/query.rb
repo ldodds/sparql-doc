@@ -3,18 +3,37 @@ module SparqlDoc
   #Wrapper for SPARQL query  
   class Query
     
-    attr_reader :path, :title, :query, :raw_query, :see, :tags, :authors, :prefixes 
-    
+    attr_reader :path, :title, :query, :raw_query, :see, :tag, :author, :prefixes 
+
+    ANNOTATIONS = {
+      :author => {
+        :multi => true 
+      },
+      :see => {
+        :multi => true 
+      },  
+      :tag => {
+        :multi => true 
+      },  
+      :title => {
+        :multi => false 
+      },
+    }
+        
     def initialize(path, query)
+      ANNOTATIONS.each do |var, config|
+        if config[:multi]
+          instance_variable_set( "@#{var}", [] )
+        else
+          instance_variable_set( "@#{var}", "" )
+        end
+      end
       @path = path
       @query = query
       @raw_query = query
       @title = @path
-      @description = "";
-      @authors = []    
-      @see = []
-      @tags = []  
-      @prefixes = {}      
+      @description = ""
+      @prefixes = {}
       initComments()
       initPrefixes()
     end
@@ -50,12 +69,22 @@ module SparqlDoc
         description_lines = []
         @raw_query.split("\n").each do |line|
           if ( header && line.match(/^#/) )
-            if ( matches = line.match(/^# *@(title|author|see|tag) *(.+)$/i) )
-              @title = matches[2].strip if matches[1] == "title"
-              @authors << matches[2].strip if matches[1] == "author"
-              @see << matches[2].strip if matches[1] == "see"
-              @tags << matches[2].strip if matches[1] == "tag"
-              description = true
+            if ( matches = line.match(/^# *@([a-zA-Z]+) *(.+)$/i) )
+              annotation = matches[1]
+              config = ANNOTATIONS[ annotation.intern ] 
+              if config
+                if config[:multi]
+                  val = instance_variable_get("@#{annotation}")
+                  val << matches[2].strip
+                else
+                  instance_variable_set("@#{annotation}", matches[2].strip)
+                end                
+                #@title = matches[2].strip if matches[1] == "title"
+                #@authors << matches[2].strip if matches[1] == "author"
+                #@see << matches[2].strip if matches[1] == "see"
+                #@tags << matches[2].strip if matches[1] == "tag"
+                description = true
+              end
             else if (description == false) 
               description_lines << line[1..-1].strip
             end
