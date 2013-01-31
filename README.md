@@ -60,17 +60,37 @@ Here's [the example output](http://ldodds.github.com/sparql-doc/) using the exam
 
 ## Installation
 
-The application is based on Ruby 1.9.3 and uses the JSON and [Redcarpet](https://github.com/vmg/redcarpet) gems.
+### Ruby Gem
 
-For now the quickest way to install the code is:
+Once RubyGems is out of read-only mode, I can release this as a gem until then use the manual instructions. 
+
+### Manual Install
+
+You'll need to make sure you have the following installed:
+
+* Ruby 1.9.3
+* RubyGems
+* Rake
+
+The code uses two gems which you'll need to have installed: JSON and [Redcarpet](https://github.com/vmg/redcarpet):
+
+	[sudo] gem install json redcarpet
+
+Once you have those installed, clone the repository and run the provided rake targets to build and install the gem 
+locally:
 
 	git clone https://github.com/ldodds/sparql-doc.git
+	cd sparql-doc
 	rake package
 	rake install
 	
+Once installed you should have a `sparql-doc` command-line tool.
+
 ## Usage
 
-Once installed you should have a `sparql-doc` command-line tool. This takes two parameters:
+_Note: the command-line syntax is likely to change in future. E.g. to add more options and/or other commands_
+
+This takes two parameters:
 
 * The input directory. The tool will process all `.rq` files in that directory
 * The output directory. All HTML output and required assets will be placed here
@@ -84,9 +104,9 @@ directory.
 
 Later versions will support additional command-line options
 
-## TODO
+## Roadmap
 
-See [issue list](https://github.com/ldodds/sparql-doc/issues)
+See the [issue list](https://github.com/ldodds/sparql-doc/issues). Got a suggestion? File an issue!
 
 ## License
 
