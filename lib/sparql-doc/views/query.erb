@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Query</title>
+    <title><%= query.title %></title>
     <link href="bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="codemirror.css">
     <style type="text/css">
@@ -19,7 +19,7 @@
 	<script src="sparql.js"></script>
     
   </head>
-  <body>
+  <body vocab="http://purl.org/dc/elements/1.1/">
   
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -41,14 +41,16 @@
         <div class="span12">
           <div class="row-fluid">          		
               <div id="query-viewer">              		             
-					<h2><%= query.title %></h2>
-					<p><%= query.description(true) %></p>
+					<h2 property="title"><%= query.title %></h2>
+					<% if query.description %>
+						<p property="description"><%= query.description(true) %></p>
+					<% end %>						
 					<dl>					
 					  <dt>Source File</dt>
 					  <dd><code><%= query.path %></code></dd>
 					  <% query.author.each do |author| %>
 					  <dt>Author</dt>
-					  <dd><%= author %></dd>
+					  <dd><span property="creator"><%= author %></span></dd>
 					  <% end %>
 					  <% query.see.each do |see| %>
 					  <dt>Link</dt>
@@ -57,7 +59,7 @@
 					  <% if query.tag.length > 0 %> 
 					  	<dt>Tag</dt>
 					  	<dd>
-					  	   <%= query.tag.join(", ") %>
+					  	   <%= query.tag.map{|x| "<span property=\"subject\">#{x}</span>" }.join(", ") %>
 					  	</dd>
 					  <% end %>							  					  
 					</dl>					
