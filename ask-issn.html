@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Query</title>
+    <title>Test dataset for a given ISSN</title>
     <link href="bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="codemirror.css">
     <style type="text/css">
@@ -19,7 +19,7 @@
 	<script src="sparql.js"></script>
     
   </head>
-  <body>
+  <body vocab="http://purl.org/dc/elements/1.1/">
   
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -41,15 +41,17 @@
         <div class="span12">
           <div class="row-fluid">          		
               <div id="query-viewer">              		             
-					<h2>Test dataset for a given ISSN</h2>
-					<p><p>Does the dataset contain a resource with this ISSN?</p>
+					<h2 property="title">Test dataset for a given ISSN</h2>
+					
+						<p property="description"><p>Does the dataset contain a resource with this ISSN?</p>
 </p>
+											
 					<dl>					
 					  <dt>Source File</dt>
 					  <dd><code>ask-issn.rq</code></dd>
 					  
 					  <dt>Author</dt>
-					  <dd>Leigh Dodds</dd>
+					  <dd><span property="creator">Leigh Dodds</span></dd>
 					  
 					  
 					  <dt>Link</dt>

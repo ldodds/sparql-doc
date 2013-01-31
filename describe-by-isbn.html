@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Query</title>
+    <title>Describe via ISSN</title>
     <link href="bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="codemirror.css">
     <style type="text/css">
@@ -19,7 +19,7 @@
 	<script src="sparql.js"></script>
     
   </head>
-  <body>
+  <body vocab="http://purl.org/dc/elements/1.1/">
   
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -41,17 +41,19 @@
         <div class="span12">
           <div class="row-fluid">          		
               <div id="query-viewer">              		             
-					<h2>Describe via ISSN</h2>
-					<p><p>This query illustrates how to describe a resource which is identified
+					<h2 property="title">Describe via ISSN</h2>
+					
+						<p property="description"><p>This query illustrates how to describe a resource which is identified
 by matching one of its properties. In this case a work is being identified
 using its ISBN-10 value.</p>
 </p>
+											
 					<dl>					
 					  <dt>Source File</dt>
 					  <dd><code>describe-by-isbn.rq</code></dd>
 					  
 					  <dt>Author</dt>
-					  <dd>Leigh Dodds</dd>
+					  <dd><span property="creator">Leigh Dodds</span></dd>
 					  
 					  
 					  <dt>Link</dt>
@@ -60,7 +62,7 @@ using its ISBN-10 value.</p>
 					   
 					  	<dt>Tag</dt>
 					  	<dd>
-					  	   book, isbn
+					  	   <span property="subject">book</span>, <span property="subject">isbn</span>
 					  	</dd>
 					  							  					  
 					</dl>					
