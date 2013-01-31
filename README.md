@@ -85,10 +85,11 @@ Later versions will support additional command-line options
 
 ## TODO
 
+* Make better use of the command-line
+* Injection of environment variables/parameters via package.json
 * Support @endpoint as a global parameter
 * Supporting running queries from documentation
 * Configurable templates
-* Injection of environment variables/parameters
 * Handling of nested directories
 
 ## License
