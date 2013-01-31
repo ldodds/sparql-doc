@@ -56,7 +56,6 @@ module SparqlDoc
     
     def generate_query_pages()
       @queries.each do |query|
-        sha = Digest::SHA1.hexdigest(query.query)
         File.open( File.join(@output_dir, query.output_filename), "w" ) do |f|
           b = binding
           dir = @dir                          
