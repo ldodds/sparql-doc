@@ -86,12 +86,7 @@ Later versions will support additional command-line options
 
 ## TODO
 
-* Make better use of the command-line
-* Injection of environment variables/parameters via package.json
-* Support @endpoint as a global parameter
-* Supporting running queries from documentation
-* Configurable templates
-* Handling of nested directories
+See [issue list](https://github.com/ldodds/sparql-doc/issues)
 
 ## License
 
