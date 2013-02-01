@@ -1,0 +1,6 @@
+{
+ "title": "BNB SPARQL Queries",
+ "description": "A collection of SPARQL queries for the British National Bibliography",
+ "author": ["Leigh Dodds"],
+ "endpoint": ["http://bnb.data.bl.uk/sparql"]
+}

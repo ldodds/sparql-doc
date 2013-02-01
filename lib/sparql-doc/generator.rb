@@ -55,8 +55,8 @@ module SparqlDoc
     def generate_index()
       $stderr.puts("Generating index.html");
       b = binding
-      dir = @dir
-      queries = @queries
+      title = @package["title"] || "Sparql Query Documentation"
+      description = @package["description"] || ""
       template = ERB.new( read_template(:index) )
       html = template.result(b)
       File.open(File.join(@output_dir, "index.html"), "w") do |f|
@@ -69,8 +69,8 @@ module SparqlDoc
       @queries.each do |query|
         $stderr.puts("Generating docs for #{query.path}")
         File.open( File.join(@output_dir, query.output_filename), "w" ) do |f|
-          b = binding
-          dir = @dir                          
+          b = binding                          
+          title = @package["title"] || "Sparql Query Documentation"
           f.puts( template.result(b) )
         end        
       end     
