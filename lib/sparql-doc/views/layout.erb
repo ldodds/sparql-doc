@@ -28,7 +28,14 @@
           	<% if overview %>
 		  		<li><a href="index.html#overview">Overview</a></li>
 		  	<% end %>		  	
-		  </ul>          
+		  	<% if @package["extra-files"] %>
+		  	  <% @package["extra-files"].each do |file| %>
+		  	    <li><a href="<%= file.gsub(".md", ".html") %>">
+		  	    	<%= file.gsub(".md", "") %>
+		  	    	</a></li>
+		  	  <% end %>
+		  	<% end %>
+		  </ul>
         </div>
       </div>
     </div>

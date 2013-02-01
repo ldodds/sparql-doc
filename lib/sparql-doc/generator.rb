@@ -40,6 +40,7 @@ module SparqlDoc
       copy_assets()
       generate_index()
       generate_query_pages()
+      copy_extra_files()
     end
   
     def copy_assets(asset_dir=@asset_dir)
@@ -52,6 +53,22 @@ module SparqlDoc
       end
     end
       
+    def copy_extra_files()
+      @package["extra-files"].each do |file|
+        markup = File.read( File.join(@dir, file) )
+        renderer = Redcarpet::Render::HTML.new({})
+        markdown = Redcarpet::Markdown.new(renderer, {})      
+        html = layout do
+          markdown.render(markup)
+        end
+        file = File.join(@output_dir, file.gsub(".md", ".html"))
+        File.open(file, "w") do |f|
+          f.puts html
+        end
+        
+      end
+    end
+    
     def get_overview()
       overview = File.join(@dir, "overview.md")
       if File.exists?( overview )
