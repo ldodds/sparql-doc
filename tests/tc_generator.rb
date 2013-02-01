@@ -51,4 +51,14 @@ class GeneratorTest < Test::Unit::TestCase
     assert_equal( {"title"=>"Package Title"}, generator.parse_package )             
   end
   
+  def test_get_overview
+    generator = SparqlDoc::Generator.new("/in", "/out", "/lib/views", "/lib/assets")
+    assert_equal( nil, generator.get_overview )
+      
+    File.open("/in/overview.md", "w") do |f|
+      f.puts "Overview"
+    end    
+    assert_equal( "<p>Overview</p>\n", generator.get_overview )                 
+  end
+  
 end

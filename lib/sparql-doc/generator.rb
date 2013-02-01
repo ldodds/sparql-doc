@@ -52,10 +52,22 @@ module SparqlDoc
       end
     end
       
+    def get_overview()
+      overview = File.join(@dir, "overview.md")
+      if File.exists?( overview )
+        markup = File.read( overview )
+        renderer = Redcarpet::Render::HTML.new({})
+        markdown = Redcarpet::Markdown.new(renderer, {})
+        return markdown.render(markup)        
+      end      
+      nil
+    end
+    
     def generate_index()
       $stderr.puts("Generating index.html");
       b = binding
       title = @package["title"] || "Sparql Query Documentation"
+      overview = get_overview()
       description = @package["description"] || ""
       template = ERB.new( read_template(:index) )
       html = template.result(b)
