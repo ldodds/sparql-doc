@@ -40,6 +40,7 @@ module SparqlDoc
       copy_assets()
       generate_index()
       generate_query_pages()
+      copy_extra_files()
     end
   
     def copy_assets(asset_dir=@asset_dir)
@@ -52,16 +53,53 @@ module SparqlDoc
       end
     end
       
+    def copy_extra_files()
+      @package["extra-files"].each do |file|
+        markup = File.read( File.join(@dir, file) )
+        renderer = Redcarpet::Render::HTML.new({})
+        markdown = Redcarpet::Markdown.new(renderer, {})      
+        html = layout do
+          markdown.render(markup)
+        end
+        file = File.join(@output_dir, file.gsub(".md", ".html"))
+        File.open(file, "w") do |f|
+          f.puts html
+        end
+        
+      end
+    end
+    
+    def get_overview()
+      overview = File.join(@dir, "overview.md")
+      if File.exists?( overview )
+        markup = File.read( overview )
+        renderer = Redcarpet::Render::HTML.new({})
+        markdown = Redcarpet::Markdown.new(renderer, {})
+        return markdown.render(markup)        
+      end      
+      nil
+    end
+    
     def generate_index()
       $stderr.puts("Generating index.html");
-      b = binding
       title = @package["title"] || "Sparql Query Documentation"
+      overview = get_overview()
       description = @package["description"] || ""
       template = ERB.new( read_template(:index) )
-      html = template.result(b)
+      html = layout do
+        b = binding
+        template.result(b)
+      end
       File.open(File.join(@output_dir, "index.html"), "w") do |f|
         f.puts(html)
       end
+    end
+    
+    def layout
+      b = binding      
+      title = @package["title"] || "Sparql Query Documentation"
+      overview = get_overview()
+      ERB.new( read_template(:layout) ).result(b)
     end
     
     def generate_query_pages()
@@ -71,7 +109,11 @@ module SparqlDoc
         File.open( File.join(@output_dir, query.output_filename), "w" ) do |f|
           b = binding                          
           title = @package["title"] || "Sparql Query Documentation"
-          f.puts( template.result(b) )
+          overview = get_overview()       
+          html = layout do
+            template.result(b)
+          end               
+          f.puts( html )
         end        
       end     
     end
