@@ -2,29 +2,38 @@ module SparqlDoc
   
   class Generator
     
-    attr_reader :dir, :graph, :queries
+    attr_reader :dir, :graph, :queries, :package
         
     def initialize(dir, output_dir, view_dir=nil, asset_dir=nil)
       @dir = dir
       @output_dir = output_dir                  
       @asset_dir = asset_dir || File.join( File.dirname( __FILE__ ) , "assets")     
       @view_dir = view_dir || File.join( File.dirname( __FILE__ ) , "views")
-      @queries = parse_queries()                
+      @package = parse_package()
+      @queries = parse_queries()                      
     end
 
     def read_template(name)
       File.read(File.join(@view_dir, "#{name}.erb"))
     end
         
+    def parse_package()
+      package = File.join(@dir, "package.json")
+      if File.exists?(package)
+        return JSON.load( File.open(package) )        
+      end
+      Hash.new
+    end
+    
     def parse_queries()
       queries = []
       Dir.glob("#{@dir}/*.rq") do |file|
         content = File.read(file)
         path = file.gsub("#{@dir}/", "")
-        queries << SparqlDoc::Query.new(path, content)
+        queries << SparqlDoc::Query.new(path, content, @package)
       end
       queries.sort! {|x,y| x.title <=> y.title }      
-      return queries
+      queries
     end
     
     def run()
