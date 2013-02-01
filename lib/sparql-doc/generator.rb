@@ -83,6 +83,7 @@ module SparqlDoc
         File.open( File.join(@output_dir, query.output_filename), "w" ) do |f|
           b = binding                          
           title = @package["title"] || "Sparql Query Documentation"
+          overview = get_overview()            
           f.puts( template.result(b) )
         end        
       end     

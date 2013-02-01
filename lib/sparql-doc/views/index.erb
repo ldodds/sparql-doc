@@ -18,14 +18,12 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar">A</span>
-            <span class="icon-bar">B</span>
-            <span class="icon-bar">C</span>
-          </a>
           <a class="brand" href="index.html"><%= title %></a>
-          <div class="nav-collapse collapse">
-          </div><!--/.nav-collapse -->
+          <ul class="nav">
+          	<% if overview %>
+		  		<li><a href="index.html#overview">Overview</a></li>
+		  	<% end %>		  	
+		  </ul>          
         </div>
       </div>
     </div>
@@ -44,7 +42,7 @@
 	  <% if overview %>
       	<div class="row">
         	<div class="span12">
-        		<h3>Overview</h3>
+        		<h3 id="overview">Overview</h3>
           		<%= overview %>
         	</div>
       	</div>
