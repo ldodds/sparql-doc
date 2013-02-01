@@ -28,5 +28,5 @@ end
 
 desc "Uninstall the gem"
 task :uninstall => [:clean] do
-  sh %{sudo gem uninstall #{NAME}}
+  sh %{sudo gem uninstall sparql-doc}
 end

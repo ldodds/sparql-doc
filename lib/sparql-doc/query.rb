@@ -3,7 +3,7 @@ module SparqlDoc
   #Wrapper for SPARQL query  
   class Query
     
-    attr_reader :path, :query, :raw_query, :prefixes, :type
+    attr_reader :path, :query, :raw_query, :prefixes, :type, :package
 
     ANNOTATIONS = {
       :author => {
@@ -30,7 +30,7 @@ module SparqlDoc
       attr_reader(var)
     end
     
-    def initialize(path, query)
+    def initialize(path, query, package={})
       ANNOTATIONS.each do |var, config|
         if config[:multi]
           instance_variable_set( "@#{var}", [] )
@@ -40,10 +40,16 @@ module SparqlDoc
       end
       @path = path
       @query = query
-      @raw_query = query
+      @raw_query = query      
       @title = @path
       @description = ""
       @prefixes = {}
+        
+      ["endpoint", "author", "tag"].each do |annotation|
+        if package[annotation]
+          instance_variable_set( "@#{annotation}", package[annotation])
+        end
+      end  
       parseQuery()
     end
     

@@ -1,20 +1,28 @@
 module SparqlDoc
   
   class Generator
-    attr_reader :dir, :graph, :lenses
     
-    def initialize(dir, output_dir)
-      @dir = dir
-      @output_dir = output_dir
-      
-      @queries = parse_queries()
-      @queries.sort! {|x,y| x.title <=> y.title }
-           
-      template_dir = File.dirname( __FILE__ )
-          
-      @index_template = ERB.new(File.read(File.join(template_dir, "views", "index.erb")))
-      @query_template = ERB.new(File.read(File.join(template_dir, "views", "query.erb")))
+    attr_reader :dir, :graph, :queries, :package
         
+    def initialize(dir, output_dir, view_dir=nil, asset_dir=nil)
+      @dir = dir
+      @output_dir = output_dir                  
+      @asset_dir = asset_dir || File.join( File.dirname( __FILE__ ) , "assets")     
+      @view_dir = view_dir || File.join( File.dirname( __FILE__ ) , "views")
+      @package = parse_package()
+      @queries = parse_queries()                      
+    end
+
+    def read_template(name)
+      File.read(File.join(@view_dir, "#{name}.erb"))
+    end
+        
+    def parse_package()
+      package = File.join(@dir, "package.json")
+      if File.exists?(package)
+        return JSON.load( File.open(package) )        
+      end
+      Hash.new
     end
     
     def parse_queries()
@@ -22,9 +30,10 @@ module SparqlDoc
       Dir.glob("#{@dir}/*.rq") do |file|
         content = File.read(file)
         path = file.gsub("#{@dir}/", "")
-        queries << SparqlDoc::Query.new(path, content)
+        queries << SparqlDoc::Query.new(path, content, @package)
       end
-      return queries
+      queries.sort! {|x,y| x.title <=> y.title }      
+      queries
     end
     
     def run()
@@ -33,12 +42,12 @@ module SparqlDoc
       generate_query_pages()
     end
   
-    def copy_assets()
+    def copy_assets(asset_dir=@asset_dir)
       $stderr.puts("Copying assets");
-      asset_dir = File.join( File.dirname( __FILE__ ), "assets" )
       Dir.new(asset_dir).each() do |file|
         if file != "." and file != ".."
-          FileUtils.copy( File.join(asset_dir, file), @output_dir )
+          FileUtils.cp( File.join(asset_dir, file), 
+            File.join(@output_dir, file) )
         end
       end
     end
@@ -46,25 +55,26 @@ module SparqlDoc
     def generate_index()
       $stderr.puts("Generating index.html");
       b = binding
-      dir = @dir
-      queries = @queries
-      html = @index_template.result(b)
+      title = @package["title"] || "Sparql Query Documentation"
+      description = @package["description"] || ""
+      template = ERB.new( read_template(:index) )
+      html = template.result(b)
       File.open(File.join(@output_dir, "index.html"), "w") do |f|
         f.puts(html)
       end
     end
     
     def generate_query_pages()
+      template = ERB.new( read_template(:query) )
       @queries.each do |query|
         $stderr.puts("Generating docs for #{query.path}")
         File.open( File.join(@output_dir, query.output_filename), "w" ) do |f|
-          b = binding
-          dir = @dir                          
-          f.puts( @query_template.result(b) )
+          b = binding                          
+          title = @package["title"] || "Sparql Query Documentation"
+          f.puts( template.result(b) )
         end        
       end     
     end
-      
   
   end
 end  
