@@ -6,7 +6,14 @@ from SPARQL queries.
 This is particularly useful when preparing training materials or resources to 
 help developers to use a particular dataset or SPARQL endpoint.
 
-## SPARQL Documentation Extensions
+## Documenting SPARQL queries
+
+`sparql-doc` supports markup for documenting sparql queries, as well as a 
+package metadata for a collection of queries.
+
+These features are described in the next sections.
+
+### SPARQL Documentation Extensions
 
 `sparql-doc` processes your SPARQL queries and looks for comments. Like Javadoc, rdoc and 
 similar tools, the content of the comments are used to provide metadata
@@ -52,8 +59,52 @@ Here's an example that uses all these:
 	}
 
 The query description can be written in [Markdown](http://daringfireball.net/projects/markdown/). So 
-you can include embedded markup, e.g. links, that help to further document a query.
- 
+you can include embedded markup, e.g. links, that help to further document a query. 
+For example:
+
+	#This query illustrates how to describe a resource which is identified
+	#by matching one on an [ISBN](http://www.isbn.org/)
+	# @title Describe via ISSN
+	# @author Leigh Dodds
+	# @tag book
+	# @tag isbn
+	# @endpoint http://bnb.data.bl.uk/sparql 
+	PREFIX bibo: <http://purl.org/ontology/bibo/> 
+	DESCRIBE ?uri WHERE {
+	  ?uri bibo:isbn10 "0261102214".
+	}
+
+### Package Metadata
+
+`sparql-doc` considers a directory of SPARQL queries to be a _package_. Metadata that describes a package 
+and how its documentation should be generated is provided by a valid JSON file called `package.json` which 
+is found in the same directory.
+
+The following example of a package.json file shows how to provide a title and a short description 
+of a package of files. The title and description will automatically be injected into the documentation.
+
+	{
+	 "title": "BNB SPARQL Queries",
+	 "description": "A collection of SPARQL queries for the British National Bibliography"
+	}	 
+
+It is common for a collection of queries to be written by the same person, be tagged in the same 
+way, or be useful against the same collection of endpoints. Rather than repeatedly apply the 
+`@author`, `@tag` and `@endpoint` annotations to all queries in a package, default values can be 
+specified in the `package.json` file. 
+
+The following example shows how to do this:
+
+	{
+	 "title": "BNB SPARQL Queries",
+	 "description": "A collection of SPARQL queries for the British National Bibliography",
+	 "author": ["Leigh Dodds"],
+	 "endpoint": ["http://bnb.data.bl.uk/sparql"]
+	}
+
+Note that because `@author`, `@tag` and `@endpoint` are all multi-valued annotations, their values 
+must be specified as a JSON array.
+
 ## Example
 
 Here's [the example output](http://ldodds.github.com/sparql-doc/) using the example queries included in the project.

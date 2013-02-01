@@ -1,7 +1,6 @@
 #Matches a book based on its ISBN and then returns a description of its
 #author or authors.
-# @title Describe authors via a work
-# @endpoint http://bnb.data.bl.uk/sparql
+# @title Describe authors via a work 
 PREFIX bio: <http://purl.org/vocab/bio/0.1/> 
 PREFIX bibo: <http://purl.org/ontology/bibo/> 
 PREFIX blterms: <http://www.bl.uk/schemas/bibliographic/blterms#> 

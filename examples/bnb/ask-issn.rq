@@ -1,9 +1,7 @@
 #Does the dataset contain a resource with this ISSN?
 #
 # @title Test dataset for a given ISSN
-# @author Leigh Dodds
 # @see http://www.isbn.org/
-# @endpoint http://bnb.data.bl.uk/sparql
 PREFIX bio: <http://purl.org/vocab/bio/0.1/> 
 PREFIX bibo: <http://purl.org/ontology/bibo/> 
 PREFIX blterms: <http://www.bl.uk/schemas/bibliographic/blterms#> 

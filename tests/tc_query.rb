@@ -119,5 +119,19 @@ EOL
     assert_equal("<p>See <a href=\"http://example.org\">my website</a></p>\n", query.description(true))
     assert_equal("DESCRIBE ?x", query.query)  
   end    
-    
+
+  def test_provide_default_authors
+    query = SparqlDoc::Query.new("/path/to/query.rq", "DESCRIBE ?x", {"author" => ["Leigh Dodds"]})
+    assert_equal(["Leigh Dodds"], query.author)          
+  end    
+
+  def test_provide_default_endpoint
+    query = SparqlDoc::Query.new("/path/to/query.rq", "DESCRIBE ?x", {"endpoint" => ["http://example.org"]})
+    assert_equal(["http://example.org"], query.endpoint)          
+  end    
+
+  def test_provide_default_tag
+    query = SparqlDoc::Query.new("/path/to/query.rq", "DESCRIBE ?x", {"tag" => ["foo"]})
+    assert_equal(["foo"], query.tag)          
+  end    
 end

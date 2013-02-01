@@ -23,4 +23,5 @@ Gem::Specification.new do |s|
   s.test_file = "tests/ts_sparql_doc.rb"
   s.add_dependency("json")
   s.add_dependency("redcarpet")
+  s.add_development_dependency("fakefs")
 end
