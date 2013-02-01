@@ -2,5 +2,6 @@
  "title": "SPARQL Doc Example Queries",
  "description": "A collection of example sparql queries to demonstrate the capabilities of sparql-doc",
  "author": ["Leigh Dodds"],
- "endpoint": ["http://bnb.data.bl.uk/sparql"]
-}
+ "endpoint": ["http://bnb.data.bl.uk/sparql"],
+ "extra-files": ["more-info.md"]
+}	

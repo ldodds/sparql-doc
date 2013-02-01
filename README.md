@@ -74,6 +74,16 @@ For example:
 	  ?uri bibo:isbn10 "0261102214".
 	}
 
+### Overview Documentation
+
+When processing a directory of queries, `sparql-doc` will automatically look for a file called 
+`overview.md`. If found, this file will be automatically parsed as Markdown and its contents included 
+in an Overview section on the homepage of the documentation.
+
+While the `description` in the `package.json` file is intended to provide a one line summary of the 
+package, the `overview.md` file is intended to provide a more detailed introduction. Both are optional, 
+so authors can choose which approach they prefer.
+
 ### Package Metadata
 
 `sparql-doc` considers a directory of SPARQL queries to be a _package_. Metadata that describes a package 
@@ -104,6 +114,19 @@ The following example shows how to do this:
 
 Note that because `@author`, `@tag` and `@endpoint` are all multi-valued annotations, their values 
 must be specified as a JSON array.
+
+The `package.json` file can also be used to indicate that extra files in the query directory should be 
+processed and included in the documentation. E.g.:
+
+	{
+	 "title": "BNB SPARQL Queries",
+	 "description": "A collection of SPARQL queries for the British National Bibliography"
+	 "extra-files": ["more-info.md"]
+	}	 
+
+This will trigger `sparql-doc` to process the `more-info.md` file as Markdown, converting it to 
+`more-info.html` which is added to the output directory. A link to `more-info` will be automatically 
+added to the header navigation
 
 ## Example
 
