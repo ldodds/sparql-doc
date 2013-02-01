@@ -65,15 +65,24 @@ module SparqlDoc
     
     def generate_index()
       $stderr.puts("Generating index.html");
-      b = binding
       title = @package["title"] || "Sparql Query Documentation"
       overview = get_overview()
       description = @package["description"] || ""
       template = ERB.new( read_template(:index) )
-      html = template.result(b)
+      html = layout do
+        b = binding
+        template.result(b)
+      end
       File.open(File.join(@output_dir, "index.html"), "w") do |f|
         f.puts(html)
       end
+    end
+    
+    def layout
+      b = binding      
+      title = @package["title"] || "Sparql Query Documentation"
+      overview = get_overview()
+      ERB.new( read_template(:layout) ).result(b)
     end
     
     def generate_query_pages()
@@ -83,8 +92,11 @@ module SparqlDoc
         File.open( File.join(@output_dir, query.output_filename), "w" ) do |f|
           b = binding                          
           title = @package["title"] || "Sparql Query Documentation"
-          overview = get_overview()            
-          f.puts( template.result(b) )
+          overview = get_overview()       
+          html = layout do
+            template.result(b)
+          end               
+          f.puts( html )
         end        
       end     
     end
