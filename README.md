@@ -134,9 +134,9 @@ Here's [the example output](http://ldodds.github.com/sparql-doc/) using the exam
 
 ## Installation
 
-### Ruby Gem
+`sparql-doc` is available as a gem:
 
-Once RubyGems is out of read-only mode, I can release this as a gem until then use the manual instructions. 
+	[sudo] gem install sparql-doc
 
 ### Manual Install
 
