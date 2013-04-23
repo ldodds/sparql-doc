@@ -20,8 +20,7 @@ class GeneratorTest < Test::Unit::TestCase
     
     File.open("/in/test.rq", "w") do |f|
       f.puts "DESCRIBE ?x"
-    end       
-    FileUtils.mkdir_p("/out")    
+    end               
   end
   
   def teardown
@@ -34,7 +33,7 @@ class GeneratorTest < Test::Unit::TestCase
     assert_equal( true, File.exists?("/out/test.js") )
     assert_equal( true, File.exists?("/out/test.css") )
   end
-  
+    
   def test_parse_queries
     generator = SparqlDoc::Generator.new("/in", "/out", "/lib/views", "/lib/assets")
     generator.parse_queries

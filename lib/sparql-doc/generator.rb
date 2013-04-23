@@ -45,6 +45,9 @@ module SparqlDoc
   
     def copy_assets(asset_dir=@asset_dir)
       $stderr.puts("Copying assets");
+      if !File.exists?(@output_dir)
+        FileUtils.mkdir_p(@output_dir)
+      end
       Dir.new(asset_dir).each() do |file|
         if file != "." and file != ".."
           FileUtils.cp( File.join(asset_dir, file), 
@@ -65,8 +68,7 @@ module SparqlDoc
         File.open(file, "w") do |f|
           f.puts html
         end
-        
-      end
+      end if @package["extra-files"]
     end
     
     def get_overview()
