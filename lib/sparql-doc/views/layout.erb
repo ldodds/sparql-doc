@@ -24,9 +24,9 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <a class="brand" href="index.html"><%= title %></a>
+          <a class="brand" href="index.html"><%= _title %></a>
           <ul class="nav">
-          	<% if overview %>
+          	<% if _overview %>
 		  		<li><a href="index.html#overview">Overview</a></li>
 		  	<% end %>
 		  	<% if @package["extra-files"] %>
