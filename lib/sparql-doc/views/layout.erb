@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title><%= title %></title>
+    <title><%= _title %></title>
     <link href="bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="codemirror.css">
     <style type="text/css">
@@ -12,15 +12,15 @@
       .sidebar-nav {
         padding: 9px 0;
       }
-    </style>    
-	<script src="jquery.js"></script> 		
+    </style>
+	<script src="jquery.js"></script>
 	<script src="bootstrap.min.js"></script>
-	
-	<script src="codemirror.js" type="text/javascript"></script> 		 				
-	<script src="sparql.js"></script>    
+
+	<script src="codemirror.js" type="text/javascript"></script>
+	<script src="sparql.js"></script>
   </head>
   <body>
-  
+
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -28,7 +28,7 @@
           <ul class="nav">
           	<% if overview %>
 		  		<li><a href="index.html#overview">Overview</a></li>
-		  	<% end %>		  	
+		  	<% end %>
 		  	<% if @package["extra-files"] %>
 		  	  <% @package["extra-files"].each do |file| %>
 		  	    <li><a href="<%= file.gsub(".md", ".html") %>">
@@ -40,9 +40,7 @@
         </div>
       </div>
     </div>
-    
+
    <%= yield %>
-  </body>	
+  </body>
 </html>
-    
-   

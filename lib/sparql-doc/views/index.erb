@@ -1,11 +1,11 @@
 <div class="container">
       <div class="hero-unit">
-        	<h1><%= title %></h1>
+        	<h1><%= _title %></h1>
       </div>
 
       <div class="row">
         <div class="span12">
-          <p><%= description %></p>
+          <p><%= _description %></p>
         </div>
       </div>
 
@@ -13,11 +13,11 @@
       	<div class="row">
         	<div class="span12">
         		<h3 id="overview">Overview</h3>
-          		<%= overview %>
+          		<%= _overview %>
         	</div>
       	</div>
-	  <% end %>      	
-      
+	  <% end %>
+
       <div class="row">
         <div class="span12">
           <h3>Queries</h3>
@@ -34,7 +34,7 @@
            		  <td><a href="<%= query.output_filename %>"><%= query.title %></a></td><td><code><%= query.path %></code></td>
            		</tr>
            		<% end %>
-			</tbody>           		
+			</tbody>
           </table>
         </div>
       </div>
