@@ -72,35 +72,35 @@ module SparqlDoc
 
     private
 
-      def parseQuery
-        query_lines = []
-        header = true
-        description = false
-        description_lines = []
-        @raw_query.split("\n").each do |line|
-          if ( header && line.match(/^#/) )
-            if ( matches = line.match(/^# *@([a-zA-Z]+) *(.+)$/i) )
-              annotation = matches[1]
-              config = ANNOTATIONS[ annotation.intern ]
-              if config
-                if config[:multi]
-                  val = instance_variable_get("@#{annotation}")
-                  val << matches[2].strip
-                else
-                  instance_variable_set("@#{annotation}", matches[2].strip)
-                end
-                description = true
+    def parseQuery
+      query_lines = []
+      header = true
+      description = false
+      description_lines = []
+      @raw_query.split("\n").each do |line|
+        if ( header && line.match(/^#/) )
+          if ( matches = line.match(/^# *@([a-zA-Z]+) *(.+)$/i) )
+            annotation = matches[1]
+            config = ANNOTATIONS[ annotation.intern ]
+            if config
+              if config[:multi]
+                val = instance_variable_get("@#{annotation}")
+                val << matches[2].strip
               else
-                $stderr.puts("Ignoring unknown annotation: @#{annotation}")
+                instance_variable_set("@#{annotation}", matches[2].strip)
               end
-            else if (description == false)
+              description = true
+            else
+              $stderr.puts("Ignoring unknown annotation: @#{annotation}")
+            end
+          else
+            if (description == false)
               description_lines << line[1..-1].strip
             end
           end
-          else
-            header = false
-            query_lines << line
-          end
+        else
+          header = false
+          query_lines << line
         end
         @description = description_lines.join("\n") unless description_lines.empty?
         @query = query_lines.join("\n") unless query_lines.empty?
@@ -114,5 +114,7 @@ module SparqlDoc
           end
         end
       end
+    end
   end
+
 end

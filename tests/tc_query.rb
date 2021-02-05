@@ -52,7 +52,7 @@ EOL
     assert_equal("/path/to/query.rq", query.title)
     assert_equal("Description", query.description)
     assert_equal("DESCRIBE ?x", query.query)
-    assert_equal("#Description\nDESCRIBE ?x\n", query.raw_query)
+    assert_equal("#Description\nDESCRIBE ?x", query.raw_query)
   end
 
   def test_description_multiple_lines
@@ -66,7 +66,7 @@ EOL
     assert_equal("/path/to/query.rq", query.title)
     assert_equal("Description\nOver multiple\n...lines", query.description)
     assert_equal("DESCRIBE ?x", query.query)
-    assert_equal("#Description\n#Over multiple\n#...lines\nDESCRIBE ?x\n", query.raw_query)
+    assert_equal("#Description\n#Over multiple\n#...lines\nDESCRIBE ?x", query.raw_query)
   end
 
   def test_title
