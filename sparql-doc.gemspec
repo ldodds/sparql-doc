@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version = "0.0.5"
   s.licenses = "CC0-1.0"
   s.platform = Gem::Platform::RUBY
-  s.required_ruby_version = ">= 2.7.0"
+  s.required_ruby_version = ">= 2.5.0"
   s.extra_rdoc_files = ["README.md"]
   s.rdoc_options = RDOC_OPTS
   s.summary = "SPARQL documentation generator"
