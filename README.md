@@ -1,21 +1,21 @@
 # Generate HTML documentation from SPARQL queries
 
-`sparql-doc` provides a simple tool for generating browsable HTML documentation 
+`sparql-doc` provides a simple tool for generating browsable HTML documentation
 from SPARQL queries.
 
-This is particularly useful when preparing training materials or resources to 
+This is particularly useful when preparing training materials or resources to
 help developers to use a particular dataset or SPARQL endpoint.
 
 ## Documenting SPARQL queries
 
-`sparql-doc` supports markup for documenting sparql queries, as well as a 
+`sparql-doc` supports markup for documenting sparql queries, as well as a
 package metadata for a collection of queries.
 
 These features are described in the next sections.
 
 ### SPARQL Documentation Extensions
 
-`sparql-doc` processes your SPARQL queries and looks for comments. Like Javadoc, rdoc and 
+`sparql-doc` processes your SPARQL queries and looks for comments. Like Javadoc, rdoc and
 similar tools, the content of the comments are used to provide metadata
 
 All simple documentation lines at the start of a query will be treated as its description. E.g:
@@ -23,7 +23,7 @@ All simple documentation lines at the start of a query will be treated as its de
 	#This is a description
 	#of my query. It has multiple
 	#lines
-	DESCRIBE ?x 
+	DESCRIBE ?x
 
 Special tag can be used to specify other metadata, such as the title of a query:
 
@@ -31,7 +31,7 @@ Special tag can be used to specify other metadata, such as the title of a query:
 	#of my query. It has multiple
 	#lines
 	# @title My Query Title
-	DESCRIBE ?x 
+	DESCRIBE ?x
 
 The full list of supported tags is:
 
@@ -52,14 +52,14 @@ Here's an example that uses all these:
 	# @see http://www.isbn.org/
 	# @tag book
 	# @tag isbn
-	# @endpoint http://bnb.data.bl.uk/sparql 
-	PREFIX bibo: <http://purl.org/ontology/bibo/> 
+	# @endpoint http://bnb.data.bl.uk/sparql
+	PREFIX bibo: <http://purl.org/ontology/bibo/>
 	DESCRIBE ?uri WHERE {
 	  ?uri bibo:isbn10 "0261102214".
 	}
 
-The query description can be written in [Markdown](http://daringfireball.net/projects/markdown/). So 
-you can include embedded markup, e.g. links, that help to further document a query. 
+The query description can be written in [Markdown](http://daringfireball.net/projects/markdown/). So
+you can include embedded markup, e.g. links, that help to further document a query.
 For example:
 
 	#This query illustrates how to describe a resource which is identified
@@ -68,40 +68,40 @@ For example:
 	# @author Leigh Dodds
 	# @tag book
 	# @tag isbn
-	# @endpoint http://bnb.data.bl.uk/sparql 
-	PREFIX bibo: <http://purl.org/ontology/bibo/> 
+	# @endpoint http://bnb.data.bl.uk/sparql
+	PREFIX bibo: <http://purl.org/ontology/bibo/>
 	DESCRIBE ?uri WHERE {
 	  ?uri bibo:isbn10 "0261102214".
 	}
 
 ### Overview Documentation
 
-When processing a directory of queries, `sparql-doc` will automatically look for a file called 
-`overview.md`. If found, this file will be automatically parsed as Markdown and its contents included 
+When processing a directory of queries, `sparql-doc` will automatically look for a file called
+`overview.md`. If found, this file will be automatically parsed as Markdown and its contents included
 in an Overview section on the homepage of the documentation.
 
-While the `description` in the `package.json` file is intended to provide a one line summary of the 
-package, the `overview.md` file is intended to provide a more detailed introduction. Both are optional, 
+While the `description` in the `package.json` file is intended to provide a one line summary of the
+package, the `overview.md` file is intended to provide a more detailed introduction. Both are optional,
 so authors can choose which approach they prefer.
 
 ### Package Metadata
 
-`sparql-doc` considers a directory of SPARQL queries to be a _package_. Metadata that describes a package 
-and how its documentation should be generated is provided by a valid JSON file called `package.json` which 
+`sparql-doc` considers a directory of SPARQL queries to be a _package_. Metadata that describes a package
+and how its documentation should be generated is provided by a valid JSON file called `package.json` which
 is found in the same directory.
 
-The following example of a package.json file shows how to provide a title and a short description 
+The following example of a package.json file shows how to provide a title and a short description
 of a package of files. The title and description will automatically be injected into the documentation.
 
 	{
 	 "title": "BNB SPARQL Queries",
 	 "description": "A collection of SPARQL queries for the British National Bibliography"
-	}	 
+	}
 
-It is common for a collection of queries to be written by the same person, be tagged in the same 
-way, or be useful against the same collection of endpoints. Rather than repeatedly apply the 
-`@author`, `@tag` and `@endpoint` annotations to all queries in a package, default values can be 
-specified in the `package.json` file. 
+It is common for a collection of queries to be written by the same person, be tagged in the same
+way, or be useful against the same collection of endpoints. Rather than repeatedly apply the
+`@author`, `@tag` and `@endpoint` annotations to all queries in a package, default values can be
+specified in the `package.json` file.
 
 The following example shows how to do this:
 
@@ -112,20 +112,20 @@ The following example shows how to do this:
 	 "endpoint": ["http://bnb.data.bl.uk/sparql"]
 	}
 
-Note that because `@author`, `@tag` and `@endpoint` are all multi-valued annotations, their values 
+Note that because `@author`, `@tag` and `@endpoint` are all multi-valued annotations, their values
 must be specified as a JSON array.
 
-The `package.json` file can also be used to indicate that extra files in the query directory should be 
+The `package.json` file can also be used to indicate that extra files in the query directory should be
 processed and included in the documentation. E.g.:
 
 	{
 	 "title": "BNB SPARQL Queries",
 	 "description": "A collection of SPARQL queries for the British National Bibliography"
 	 "extra-files": ["more-info.md"]
-	}	 
+	}
 
-This will trigger `sparql-doc` to process the `more-info.md` file as Markdown, converting it to 
-`more-info.html` which is added to the output directory. A link to `more-info` will be automatically 
+This will trigger `sparql-doc` to process the `more-info.md` file as Markdown, converting it to
+`more-info.html` which is added to the output directory. A link to `more-info` will be automatically
 added to the header navigation
 
 ## Example
@@ -142,23 +142,22 @@ Here's [the example output](http://ldodds.github.com/sparql-doc/) using the exam
 
 You'll need to make sure you have the following installed:
 
-* Ruby 1.9.3
+* Ruby 2.5.0+
 * RubyGems
+* Bundler
 * Rake
 
-The code uses two gems which you'll need to have installed: JSON and [Redcarpet](https://github.com/vmg/redcarpet):
-
-	[sudo] gem install json redcarpet
-
-Once you have those installed, clone the repository and run the provided rake targets to build and install the gem 
+Once you have those installed, clone the repository and run the provided rake targets to build and install the gem
 locally:
 
 	git clone https://github.com/ldodds/sparql-doc.git
 	cd sparql-doc
-	rake package
-	rake install
-	
-Once installed you should have a `sparql-doc` command-line tool.
+
+The code uses two gems which you'll need to have installed: JSON and [Redcarpet](https://github.com/vmg/redcarpet):
+
+	bundle install
+
+Once installed you should be able to run the `bin/sparql-doc` command-line tool.
 
 ## Usage
 
@@ -168,12 +167,12 @@ This takes two parameters:
 
 * The input directory. The tool will process all `.rq` files in that directory
 * The output directory. All HTML output and required assets will be placed here
-	
+
 E.g. you can run:
 
 	sparql-doc examples/bnb /your/output/directory
-	
-This will generate documentation from the bundled examples and place it into the specified 
+
+This will generate documentation from the bundled examples and place it into the specified
 directory.
 
 Later versions will support additional command-line options
