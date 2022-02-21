@@ -130,7 +130,7 @@ added to the header navigation
 
 ## Example
 
-Here's [the example output](http://ldodds.github.com/sparql-doc/) using the example queries included in the project.
+Here's [the example output](https://ldodds.github.io/sparql-doc/) using the example queries included in the project.
 
 ## Installation
 
